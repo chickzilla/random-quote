@@ -19,7 +19,7 @@ class RegisterView(APIView):
             return Response({'error': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
 
         User.objects.create_user(username=username, password=password)
-        return Response({'message': 'User created successfully!'})
+        return Response({'message': 'User created successfully!'}, status=status.HTTP_200_OK)
 
 class LoginView(APIView):
     def post(self, request):
@@ -35,6 +35,6 @@ class LoginView(APIView):
             return Response({
                 'token': str(token),
                 'message': 'Login successfully!'
-            })
+            }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Username or password are not correct.'}, status=status.HTTP_401_UNAUTHORIZED)
